@@ -54,7 +54,7 @@ static void  *kTableChangeKey       = &kTableChangeKey;
     [_listView setDataSource:self];
     [_listView setScrollEnabled:YES];
     [_listView setBackgroundColor:[UIColor whiteColor]];
-    [_listView setEstimatedRowHeight:0];
+    [_listView setEstimatedRowHeight:0];  //解决iOS11后tableview滚动contentOffset异常变化（目前发现知乎客户端也类似bug没解决）
     [_listView setEstimatedSectionFooterHeight:0];
     [_listView setEstimatedSectionHeaderHeight:0];
     [_listView setClipsToBounds:YES];
@@ -68,7 +68,8 @@ static void  *kTableChangeKey       = &kTableChangeKey;
     [_webView.scrollView setShowsVerticalScrollIndicator:NO];
     [_webView.scrollView setBounces:NO];
     [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlStr]]];
-    [_listView addSubview:_webView];    
+    [_listView addSubview:_webView];
+    //
 }
 
 - (void)addWebViewObserve {

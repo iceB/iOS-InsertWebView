@@ -70,7 +70,6 @@
 		F9699A82204BACEF009B0A9F /* ICWebViewInesert */ = {
 			isa = PBXGroup;
 			children = (
-				F9699A9D204BBAC0009B0A9F /* Model */,
 				F9699A99204BACFD009B0A9F /* View */,
 				F9699A83204BACEF009B0A9F /* AppDelegate.h */,
 				F9699A84204BACEF009B0A9F /* AppDelegate.m */,
@@ -90,21 +89,14 @@
 		F9699A99204BACFD009B0A9F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F9699A9E204BBAEC009B0A9F /* UIScrollView+GestureExtend.h */,
+				F9699A9F204BBAEC009B0A9F /* UIScrollView+GestureExtend.m */,
 				F92F0C7D204DA71D00CAA89B /* UIView+CJXView.h */,
 				F92F0C7E204DA71D00CAA89B /* UIView+CJXView.m */,
 				F9699A9A204BBA4F009B0A9F /* ICWebView.h */,
 				F9699A9B204BBA4F009B0A9F /* ICWebView.m */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		F9699A9D204BBAC0009B0A9F /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				F9699A9E204BBAEC009B0A9F /* UIScrollView+GestureExtend.h */,
-				F9699A9F204BBAEC009B0A9F /* UIScrollView+GestureExtend.m */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
