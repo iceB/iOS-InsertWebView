@@ -86,19 +86,23 @@ static void  *kTableChangeKey       = &kTableChangeKey;
         CGFloat contentHeight = _listView.frame.size.height;
         if (scrollView.contentOffset.y >= _webHeight - contentHeight) {     //tableview offsetY 高于webViewConentHeight （在section2内滑动）
             
-            _webView.scrollView.scrollEnabled = NO;
-            _webView.isTouched = NO;
-            [_webView setY:MAX(_webHeight - contentHeight, _webViewToTopHeight)];
+            _webView.scrollView.scrollEnabled = NO; //禁止webView滑动
+            _webView.isTouched = NO;                //重置触摸flag
+            [_webView setY:MAX(_webHeight - contentHeight, _webViewToTopHeight)];   //改变webview.Y让其使终处于屏幕中
+            
+            //将webview底部紧贴section1底部
             if (_webView.scrollView.contentOffset.y != _webView.scrollView.contentSize.height - _webView.frame.size.height) {
                 [_webView.scrollView setContentOffset:CGPointMake(0, _webView.scrollView.contentSize.height - _webView.frame.size.height) animated:NO];
             }
         } else if (scrollView.contentOffset.y  < _webViewToTopHeight){      //tableview offsetY 在 section 0 和 webview之间
-            _webView.isTouched = NO;
+            _webView.isTouched = NO;                    //重置触摸flag
+            _webView.scrollView.scrollEnabled = NO; //禁止webView滑动
+
             if (_webView.y != _webViewToTopHeight) {
-                [_webView setY:_webViewToTopHeight];
+                [_webView setY:_webViewToTopHeight];    //section0还在可视范围内，设置webview与section1顶部对齐
             }
             if (_webView.scrollView.contentOffset.y != 0) {
-                [_webView.scrollView setContentOffset:CGPointMake(0, 0)];
+                [_webView.scrollView setContentOffset:CGPointMake(0, 0)]; //设置内容处于顶部
             }
         } else {
             _webView.scrollView.scrollEnabled = _isNeedSimuTouch; //是否需要webview接受滑动手势
@@ -110,10 +114,9 @@ static void  *kTableChangeKey       = &kTableChangeKey;
     } else if (context == kWebSizeChangeKey) {
         if (_webHeight != scrollView.contentSize.height) {
             _webHeight = scrollView.contentSize.height;
-            [_listView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:1]] withRowAnimation:UITableViewRowAnimationNone];
+            [_listView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:1]] withRowAnimation:UITableViewRowAnimationNone]; //contentSize变化，将cell高度刷新
         }
-        
-        if (_listView.contentOffset.y >= _webHeight  - 50) {
+        if (_listView.contentOffset.y >= _webHeight  - 50) { //在section2内滑动，webview肯定是处于滚到最底部的，如果contentSize发生变化，需要将webView手动滚到底部。
             [_webView.scrollView setContentOffset:CGPointMake(0, _webView.scrollView.contentSize.height - _webView.frame.size.height)];
         }
     }
